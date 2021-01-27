@@ -3,7 +3,7 @@ const h : number = window.innerHeight
 const parts : number = 4 
 const scGap : number = 0.02 / parts 
 const strokeFactor : number = 90 
-const sizeFactor : number = 2.9 
+const sizeFactor : number = 5.9 
 const delay : number = 20 
 const backColor : string = "#bdbdbd" 
 const colors : Array<string> = [
@@ -36,18 +36,19 @@ class DrawingUtil {
     static drawLineDropBox(context : CanvasRenderingContext2D, scale : number) {
         const sc1 : number = ScaleUtil.divideScale(scale, 0, parts)
         const sc2 : number = ScaleUtil.divideScale(scale, 1, parts)
-        const sc3 : number = ScaleUtil.divideScale(scale, 0, parts)
-        const sc4 : number = ScaleUtil.divideScale(scale, 1, parts)
+        const sc3 : number = ScaleUtil.divideScale(scale, 2, parts)
+        const sc4 : number = ScaleUtil.divideScale(scale, 3, parts)
         const size : number = Math.min(w, h) / sizeFactor 
+        console.log(sc1, sc2, sc3, sc4)
         context.save()
         context.translate(w / 2, h / 2)
         for (var j = 0; j < 2; j++) {
             const sa : number = size * (1 - 2 * j)
-            DrawingUtil.drawLine(context, sa * sc2, 0, sa * sc1, 0)
+            DrawingUtil.drawLine(context, sa * sc4, 0, sa * sc1, 0)
         }
         context.save()
-        context.translate(0, h * 0.5 * sc4)
-        context.fillRect(-size / 2, 0, size, size * sc3)
+        context.translate(0, h * 0.5 * sc3)
+        context.fillRect(-size / 2, 0, size, size * sc2)
         context.restore()
         context.restore()
     }
